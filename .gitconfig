@@ -1,17 +1,17 @@
 [user]
-	email = email
+  email = email
 
 [alias]
-	aa = add --all
+  aa = add --all
   co = checkout
   c = commit
   st = status
   br = branch
-	undo = reset HEAD --
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
-	rd = !git aa && git commit -a -m \"WIP\"
-	up = !git aa && git commit -a -m \"WIP\" && git push
-	z = "!f() { git add -a && git commit -a 'WIP' && git push}; f"
-	aliases = !git config --get-regexp alias
+  undo = reset HEAD --
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  rd = !git aa && git commit -a -m \"WIP\"
+  up = !git aa && git commit -a -m \"WIP\" && git push
+  z = "!f() { git add -a && git commit -a 'WIP' && git push}; f"
+  aliases = !git config --get-regexp alias
