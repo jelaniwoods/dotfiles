@@ -11,7 +11,7 @@
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   type = cat-file -t
   dump = cat-file -p
-	rd = !git aa && git commit -a -m \"wip\"
-	up = !git aa && git commit -a -m \"wip\" && git push
+	rd = !git aa && git commit -a -m \"WIP\"
+	up = !git aa && git commit -a -m \"WIP\" && git push
 	z = "!f() { git add -a && git commit -a 'WIP' && git push}; f"
 	aliases = !git config --get-regexp alias
