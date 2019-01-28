@@ -8,9 +8,9 @@
   st = status
   br = branch
 	undo = reset HEAD --
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  type = cat-file -t
-  dump = cat-file -p
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
 	rd = !git aa && git commit -a -m \"WIP\"
 	up = !git aa && git commit -a -m \"WIP\" && git push
 	z = "!f() { git add -a && git commit -a 'WIP' && git push}; f"
