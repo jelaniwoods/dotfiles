@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# first download this https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/linux.html
+# then bash Miniconda3-latest-Linux-x86_64.sh
+# close and restart terminal
+# use the following command to test your installation
+# conda list
+
+cd worskpace
+mkdir deeplearning
+cd deeplearning
+echo "Install Conda"
+echo "Clone fastai v3 repo"
+git clone https://github.com/fastai/course-v3
+echo "Conda i"
+conda update conda
+conda install -c pytorch -c fastai fastai pytorch torchvision cuda92
+
+# If you have any problem while using the fastai library try running
+# conda install -c fastai fastai
