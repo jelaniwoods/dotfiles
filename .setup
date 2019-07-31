@@ -22,7 +22,7 @@ source ~/.rvm/scripts/rvm
 echo "Install Zsh and Oh-my-Zsh"
 
 yes | sudo apt-get install zsh
-yes | sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)""
+yes | sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "Finished"
 echo ""
