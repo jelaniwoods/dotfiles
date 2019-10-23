@@ -11,6 +11,8 @@ source ~/.rvm/scripts/rvm
 ruby -v
 rvm install 2.6.3
 mdkir tmp-gemfile
+ls
+pwd
 curl -o tmp-gemfile/Gemfile https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/Gemfile
 cd tmp-gemfile
 bundle install
