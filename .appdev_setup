@@ -14,7 +14,7 @@ mdkir tmp-gemfile
 ls
 pwd
 echo "Download Gemfile"
-curl -o tmp-gemfile/Gemfile https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/Gemfile
+curl -o ~/tmp-gemfile/Gemfile https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/Gemfile
 cd tmp-gemfile
 echo "Bundle Gems"
 bundle install
