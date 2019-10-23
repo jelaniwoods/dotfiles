@@ -10,7 +10,7 @@ yes | \curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 ruby -v
 rvm install 2.6.3
-mdkir ~/tmp-gemfile
+mkdir ~/tmp-gemfile
 echo "Download Gemfile"
 curl -o ~/tmp-gemfile/Gemfile https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/Gemfile
 cd tmp-gemfile
