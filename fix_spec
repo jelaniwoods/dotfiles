@@ -12,7 +12,7 @@ find_this = "expect(page).to have_css(\"textarea\", count: 1)"
 replacement_text = ""
 
 text.each_line do |line|
-  puts "#{line_num += 1} #{line}"
+  line_num += 1
   if line_num > 490 && line.strip == find_this
     replacement_text += line.gsub(find_this, find_this.gsub("count", "minimum"))
   else
