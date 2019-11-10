@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+spec_path = "spec/features/photos_spec.rb"
+
+spec_file = File.open(spec_path, File::RDWR)
+
+text = File.open(spec_path).read
+text.gsub!(/\r\n?/, "\n")
+line_num = 0
+find_this = "expect(page).to have_css(\"textarea\", count: 1)"
+
+replacement_text = ""
+
+text.each_line do |line|
+  puts "#{line_num += 1} #{line}"
+  if line_num > 490 && line.strip == find_this
+    replacement_text += line.gsub(find_this, find_this.gsub("count", "minimum"))
+  else
+    replacement_text += line
+  end
+end
+
+spec_file.seek(0)
+spec_file.write(replacement_text)
