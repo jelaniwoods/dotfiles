@@ -4,7 +4,7 @@ server_path = "bin/server"
 
 filename = File.open(server_path, File::RDWR)
 
-new_content = <<-content
+new_content = <<~content
     #!/bin/bash
 
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
