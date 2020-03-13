@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# wget  -O bin/fix_it "url" && chmod 777 bin/fix_it && bin/fix_it
+require "open-uri"
+spec_path = "spec/features/user_auth_spec.rb"
+
+spec_file = File.open(spec_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/photogram-final/master/spec/features/user_auth_spec.rb"
+text = File.open(spec_path).read
+text.gsub!(/\r\n?/, "\n")
+line_num = 0
+find_this = "expect(page).to have_css(\"textarea\", count: 1)"
+
+new_content = open(url).read
+
+File.open(filename, "w") { |file| file << new_content }
+
+spec_file.seek(0)
+spec_file.write(new_content)
