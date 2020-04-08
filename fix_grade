@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# wget  -O bin/fix_grade "url" && chmod 777 bin/fix_grade && bin/fix_grade
+require "open-uri"
+`bundle u grade_runner`
+format_path = "spec/support/json_output_formatter.rb"
+
+format_file = File.open(format_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/rps-html/master/spec/support/json_output_formatter.rb"
+text = File.open(format_path).read
+
+new_content = open(url).read
+
+format_file.seek(0)
+format_file.write(new_content)
