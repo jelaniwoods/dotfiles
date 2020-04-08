@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/fix_grade "url" && chmod 777 bin/fix_grade && bin/fix_grade
+# wget  -O bin/fix_application "url" && chmod 777 bin/fix_application && bin/fix_application
 
 format_path = "config/application.rb"
 
@@ -7,7 +7,7 @@ format_file = File.open(format_path, File::RDWR)
 
 text = File.open(format_path).read
 
-new_content = open(url).read.gsub("# require \"action_mailer/railtie\"", "require \"action_mailer/railtie\"")
+new_content = text.gsub("# require \"action_mailer/railtie\"", "require \"action_mailer/railtie\"")
 
 format_file.seek(0)
 format_file.write(new_content)
