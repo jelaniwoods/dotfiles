@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# wget  -O bin/webgit "url" && chmod 777 bin/webgit && bin/webgit
+require "open-uri"
+
+format_path = "config.ru"
+
+format_file = File.open(format_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/rps-html/master/config.ru"
+text = File.open(format_path).read
+
+new_content = open(url).read
+
+format_file.seek(0)
+format_file.write(new_content)
