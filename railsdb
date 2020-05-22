@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# wget  -O bin/railsdb "url" && chmod 777 bin/railsdb && bin/railsdb
+require "open-uri"
+`rails g rails_db initializer`
+file_path = "config/initializers/rails_db.rb"
+
+file = File.open(file_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/firstdraft/appdev_template/jw-add-rails_db_initializer/files/rails_db.rb"
+text = File.open(file_path).read
+text.gsub!(/\r\n?/, "\n")
+line_num = 0
+find_this = "expect(page).to have_css(\"textarea\", count: 1)"
+
+new_content = open(url).read
+
+File.open(file_file, "w") { |file| file << new_content }
+
+file_file.seek(0)
+file_file.write(new_content)

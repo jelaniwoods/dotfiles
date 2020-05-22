@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/webgit "url" && chmod 777 bin/webgit && bin/webgit
+# wget  -O bin/webgit "https://tinyurl.com/webgitspring" && chmod 777 bin/webgit && bin/webgit
 require "open-uri"
 
 format_path = "config.ru"
