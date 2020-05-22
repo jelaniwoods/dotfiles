@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/railsdb "url" && chmod 777 bin/railsdb && bin/railsdb
+# wget  -O bin/railsdb "https://tinyurl.com/railsdb" && chmod 777 bin/railsdb && bin/railsdb
 require "open-uri"
 `rails g rails_db initializer`
 file_path = "config/initializers/rails_db.rb"
