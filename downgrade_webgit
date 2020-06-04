@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/dgwg "https://tinyurl.com/dgwg" && chmod 777 bin/dgwg && bin/dgwg
+# wget  -O bin/dgwg "https://tinyurl.com/gitpatch" && chmod 777 bin/dgwg && bin/dgwg
 require "open-uri"
 
 file_path = "Gemfile"
