@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# wget  -O bin/dgwg "https://tinyurl.com/gitpatch" && chmod 777 bin/dgwg && bin/dgwg
+require "open-uri"
+
+file_path = "spec/features/02_user_details_spec.rb"
+
+spec = File.open(file_path, File::RDWR)
+
+contents = spec.read
+
+find_line = "expect(page).to have_text(/31 minutes ago/i),"
+new_line = 'visit "/users/#{famous_bacon.username}"'
+
+new_contents = contents.gsub(find_line, new_line + "\n\n\t\t" + find_line)
+
+File.open(file_path, 'w') { |file| file.write(new_contents) }
+
