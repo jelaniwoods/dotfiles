@@ -93,14 +93,14 @@ RSpec::Matchers.define :be_next_to do |expected|
   actual_height = nil
   expected_height = nil
   match do |actual|
-    expected_top = expected.rect.top
-    expected_bottom = expected.rect.bottom 
-    expected_right = expected.rect.right
-    expected_left = expected.rect.left
+    expected_top = expected.rect.y
+    expected_bottom = expected.rect.height + expected_top 
+    expected_right = expected.rect.x
+    expected_left = expected_right + expected.rect.width
             
-    actual_top = actual.rect.top
-    actual_right = actual.rect.right
-    actual_left = actual.rect.left
+    actual_top = actual.rect.y
+    actual_right = actual.rect.x
+    actual_left = actual_right + actual.rect.width
     
     actual_top.between?(expected_top,expected_bottom) && 
       (!actual_left.between?(expected_left, expected_right) && !actual_right.between?(expected_left, expected_right))
@@ -114,11 +114,11 @@ RSpec::Matchers.define :be_above do |expected|
   actual_height = nil
   expected_height = nil
   match do |actual|
-    expected_top = expected.rect.top
-    expected_bottom = expected.rect.bottom
+    expected_top = expected.rect.y
+    expected_bottom = expected.rect.height + expected_top
             
-    actual_top = actual.rect.top
-    actual_bottom = actual.rect.bottom
+    actual_top = actual.rect.y
+    actual_bottom = actual.rect.height + actual_top
     
     expected_bottom > actual_top
 
@@ -132,14 +132,26 @@ RSpec::Matchers.define :be_below do |expected|
   actual_height = nil
   expected_height = nil
   match do |actual|
-    expected_top = expected.rect.top
-    expected_bottom = expected.rect.bottom
+    expected_top = expected.rect.y
+    expected_bottom = expected.rect.height + expected_top
             
-    actual_top = actual.rect.top
-    actual_bottom = actual.rect.bottom
+    actual_top = actual.rect.y
+    actual_bottom = actual.rect.height + actual_top
     
     actual_top > expected_bottom
 
+  end
+  failure_message do |actual|
+    "expected #{actual.tag_name} to be below '#{expected.tag_name}', but the actual top was '#{expected_bottom}' and the expected bottom is #{actual_top}."
+  end
+end
+
+# expect(“nav”).to have_child(“a”)
+RSpec::Matchers.define :have_child do |expected|
+
+  match do |actual|
+    tag_name = actual.tag_name
+    actual.has_css?(expected.tag_name, text: expected.text)
   end
   failure_message do |actual|
     "expected #{actual.tag_name} to be below '#{expected.tag_name}', but the actual top was '#{expected_bottom}' and the expected bottom is #{actual_top}."
