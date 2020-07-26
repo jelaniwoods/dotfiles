@@ -7,6 +7,7 @@ RSpec::Matchers.define :be_a_multiple_of do |expected|
   end
 end
 
+# See color examples here https://github.com/halostatue/color/blob/master/lib/color/rgb/colors.rb#L9
 RSpec::Matchers.define :have_color do |expected_color|
   actual_color = nil
   match do |actual|
