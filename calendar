@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/fus "https://tinyurl.com/u31min" && chmod 777 bin/fus && bin/fus
+# wget  -O bin/cal "https://tinyurl.com/y2z9pmhj" && chmod 777 bin/cal && bin/cal
 require "open-uri"
 
 file_path = "spec/features/calendar_spec.rb"
