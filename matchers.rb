@@ -155,6 +155,6 @@ RSpec::Matchers.define :have_child do |expected|
     actual.has_css?(expected.tag_name, text: expected.text)
   end
   failure_message do |actual|
-    "expected #{actual.tag_name} to be below '#{expected.tag_name}', but the actual top was '#{expected_bottom}' and the expected bottom is #{actual_top}."
+    "expected #{actual.tag_name} to have a child '#{expected.tag_name}' element, but couldn't find one."
   end
 end
