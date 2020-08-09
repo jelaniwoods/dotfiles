@@ -5,7 +5,7 @@ specs = open("specs.md").read
 
 new_spec_content = specs.gsub(/Failures:(.|\n)*/, "").gsub(/\(FAILED - \d\)/, "")
 new_spec_content = new_spec_content.gsub(/$\n^\s\s/, " ")
-## Specs
+
 top = <<~HEREDOC
 <details>
   <summary>Click here to see names of each test</summary>
