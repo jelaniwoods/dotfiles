@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/dgwg "https://tinyurl.com/gitpatch" && chmod 777 bin/dgwg && bin/dgwg
+# wget  -O bin/unwebpack "https://tinyurl.com/unwebpack" && chmod 777 bin/unwebpack && bin/unwebpack
 require "open-uri"
 require "fileutils"
 
