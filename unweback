@@ -22,7 +22,7 @@ new_contents = contents.gsub(/^.*javascript_pack_tag.*$/, "")
 File.open(layout_file_path, 'w') { |file| file.write(new_contents) }
 system "bundle install"
 
-files_to_remove = ["package.json", "postcss.config.js", "yarn.lock", "bin/yarn", "babel.config.js", "bin/webpack", "bin/webpack-dev-server"]
+files_to_remove = ["package.json", "postcss.config.js", "yarn.lock", "bin/yarn", "babel.config.js", "config/webpacker.yml", "bin/webpack", "bin/webpack-dev-server"]
 
 folders_to_remove = ["node_modules", "app/javascript", "config/webpack"]
 
