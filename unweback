@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# wget  -O bin/dgwg "https://tinyurl.com/gitpatch" && chmod 777 bin/dgwg && bin/dgwg
+require "open-uri"
+require "fileutils"
+
+file_path = "Gemfile"
+
+gemfile = File.open(file_path, File::RDWR)
+
+contents = gemfile.read
+new_contents = contents.gsub(/gem 'webpacker'.*$/, "")
+
+File.open(file_path, 'w') { |file| file.write(new_contents) }
+
+layout_file_path = "app/views/layouts/application.html.erb"
+
+layout = File.open(layout_file_path, File::RDWR)
+
+contents = layout.read
+new_contents = contents.gsub(/^.*javascript_pack_tag.*$/, "")
+
+File.open(layout_file_path, 'w') { |file| file.write(new_contents) }
+system "bundle install"
+
+files_to_remove = ["package.json", "postcss.config.js", "yarn.lock", "bin/yarn", "babel.config.js", "bin/webpack", "bin/webpack-dev-server"]
+
+folders_to_remove = ["node_modules", "app/javascript", "config/webpack"]
+
+files_to_remove.each do |path_to_file|
+  File.delete(path_to_file) if File.exist?(path_to_file)
+end
+
+folders_to_remove.each do |path_to_directory|
+  FileUtils.remove_dir(path_to_directory) if File.directory?(path_to_directory)
+end
+
+system("git add -A && git commit -am 'Remove webpacker'")
