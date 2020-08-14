@@ -10,3 +10,13 @@ url = "https://raw.githubusercontent.com/appdev-projects/photogram-signin/jw-upd
 new_content = open(url).read
 
 File.open(format_file, "w") { |file| file << new_content }
+
+file_path = "lib/tasks/dev.rake"
+
+format_file = File.open(file_path, File::RDWR)
+
+text = File.open(file_path).read
+url = "https://raw.githubusercontent.com/appdev-projects/photogram-signin/jw-update-specs-and-dev-prime/lib/tasks/dev.rake"
+new_content = open(url).read
+
+File.open(format_file, "w") { |file| file << new_content }
