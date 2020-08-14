@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # wget  -O bin/psignin "url" && chmod 777 bin/psignin && bin/psignin
-
+require "open-uri"
 spec_path = "spec/features/user_auth_spec.rb"
 
 format_file = File.open(spec_path, File::RDWR)
