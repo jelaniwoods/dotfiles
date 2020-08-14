@@ -9,5 +9,4 @@ text = File.open(spec_path).read
 url = "https://raw.githubusercontent.com/appdev-projects/photogram-signin/jw-update-specs-and-dev-prime/spec/features/user_auth_spec.rb"
 new_content = open(url).read
 
-format_file.seek(0)
-format_file.write(new_content)
+File.open(format_file, "w") { |file| file << new_content }
