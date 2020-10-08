@@ -1,4 +1,3 @@
-  
 #!/usr/bin/env ruby
 `rspec --order default --require spec_helper --format documentation --no-color --out specs.md`
 specs = open("specs.md").read
