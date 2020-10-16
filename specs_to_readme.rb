@@ -4,8 +4,9 @@ specs = open("specs.md").read
 
 # Currently only removes the failures (when run on the NOT target
 # TODO should remove successes too, when run on the target)
-new_spec_content = specs.gsub(/Failures:(.|\n)*/, "").gsub(/\(FAILED - \d+\)/, "")
+new_spec_content = specs.gsub(/Failures:(.|\n)*/, "").gsub(/\(FAILED - \d+\)/, "</li>")
 new_spec_content = new_spec_content.gsub(/$\n^\s\s/, " ")
+new_spec_content = new_spec_content.gsub(/^(?!\n)/, "<li>")
 
 top = <<~HEREDOC
 <details>
