@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+# wget  -O bin/sub_zero "url" && chmod 777 bin/sub_zero && bin/sub_zero
+
+require "open-uri"
+
+course = "https://raw.githubusercontent.com/appdev-projects/classroom-queries-debug/jw-add-points/spec/features/course_spec.rb"
+department = "https://raw.githubusercontent.com/appdev-projects/classroom-queries-debug/jw-add-points/spec/features/department_spec.rb"
+student = "https://raw.githubusercontent.com/appdev-projects/classroom-queries-debug/jw-add-points/spec/features/student_spec.rb"
+
+course_spec_file = "spec/features/course_spec.rb"
+department_spec_file = "spec/features/department_spec.rb"
+student_spec_file = "spec/features/student_spec.rb"
+
+
+course_spec = File.open(course_spec_file, File::RDWR)
+
+new_content = open(course).read
+
+course_spec.seek(0)
+course_spec.write(new_content)
+
+new_content = open(course).read
+
+department_spec = File.open(department_spec_file, File::RDWR)
+
+new_content = open(department).read
+
+department_spec.seek(0)
+department_spec.write(new_content)
+
+new_content = open(student).read
+
+student_spec = File.open(student_spec_file, File::RDWR)
+
+new_content = open(student).read
+
+student_spec.seek(0)
+student_spec.write(new_content)
