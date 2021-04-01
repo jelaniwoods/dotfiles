@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# wget  -O bin/hotfix_shotgun "url" && chmod 777 bin/hotfix_shotgun && bin/hotfix_shotgun
+
+format_path = "/home/gitpod/.rvm/gems/ruby-3.0.0/gems/shotgun-0.9.2/bin/shotgun"
+
+format_file = File.open(format_path, File::RDWR)
+
+text = File.open(format_path).read
+
+find = "server.run app, options do |inst|"
+replace = "server.run app, **options do |inst|"
+new_content = text.gsub(find, replace)
+
+format_file.seek(0)
+format_file.write(new_content)
