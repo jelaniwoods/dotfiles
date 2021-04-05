@@ -26,6 +26,19 @@ new_content = open(url).read
 format_file.seek(0)
 format_file.write(new_content)
 
+url = "https://raw.githubusercontent.com/appdev-projects/rps-html/jw-just-for-the-hotfix/spec/features/3_scissors_spec.rb"
+
+format_path = "spec/features/3_scissors_spec.rb"
+
+format_file = File.open(format_path, File::RDWR)
+
+text = File.open(format_path).read
+
+new_content = open(url).read
+
+format_file.seek(0)
+format_file.write(new_content)
+
 url = "https://github.com/appdev-projects/rps-html/blob/jw-just-for-the-hotfix/spec/features/4_index_spec.rb"
 
 format_path = "spec/features/4_index_spec.rb"
