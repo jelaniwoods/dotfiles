@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# wget  -O bin/array "url" && chmod 777 bin/array && bin/array
+require "open-uri"
+format_path = "spec/scripts/array_count_3_spec.rb"
+
+format_file = File.open(format_path, File::RDWR)
+
+text = File.open(format_path).read
+
+new_content = open("https://raw.githubusercontent.com/jelaniwoods-appdev/array-chapter/master/spec/scripts/array_count_3_spec.rb").read
+
+
+format_file.seek(0)
+format_file.write(new_content)
