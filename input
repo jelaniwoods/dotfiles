@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# wget  -O bin/input "url" && chmod 777 bin/input && bin/input
+require "open-uri"
+format_path = "spec/scripts/loops_spec.rb"
+
+format_file = File.open(format_path, File::RDWR)
+
+text = File.open(format_path).read
+
+new_content = URI.open("https://raw.githubusercontent.com/appdev-projects/loops-chapter/master/spec/scripts/loops_spec.rb").read
+
+
+format_file.seek(0)
+format_file.write(new_content)
