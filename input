@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/input "url" && chmod 777 bin/input && bin/input
+# wget  -O bin/input "https://tinyurl.com/zu83mf2y" && chmod 777 bin/input && bin/input
 require "open-uri"
 format_path = "spec/scripts/loops_spec.rb"
 
