@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/fus "https://tinyurl.com/u31min" && chmod 777 bin/fus && bin/fus
+# wget  -O bin/rb "https://tinyurl.com/rb266" && chmod 777 bin/rb && bin/rb
 require "open-uri"
 
 file_path = "Gemfile"
