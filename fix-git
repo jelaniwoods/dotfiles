@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require "fileutils"
 require "open-uri"
 `sudo apt install python3-pip -y`
 `pip3 install git-filter-repo`
@@ -10,4 +11,8 @@ new_content.gsub!(" vendor/bundle/*", "vendor/bundle/*")
 new_content.gsub!(" !vendor/bundle/.keep", "!vendor/bundle/.keep")
 format_file.seek(0)
 format_file.write(new_content)
+FileUtils.rm_rf("vendor/bundle/ruby")
+`bin/setup`
 
+
+# wget  -O bin/fix_git "https://tinyurl.com/fix-web-git" && chmod 777 bin/fix_git && bin/fix_git
