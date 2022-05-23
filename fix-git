@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require "open-uri"
+`sudo apt install python3-pip -y`
+`pip3 install git-filter-repo`
+`/home/gitpod/.local/bin/git-filter-repo --path vendor/bundle/ruby --invert-paths --force`
+
+format_file = File.open(".gitignore", File::RDWR)
+new_content = File.open(".gitignore").read
+new_content.gsub!(" vendor/bundle/*", "vendor/bundle/*")
+new_content.gsub!(" !vendor/bundle/.keep", "!vendor/bundle/.keep")
+format_file.seek(0)
+format_file.write(new_content)
+
