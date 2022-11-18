@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wget  -O bin/sync "https://tinyurl.com/msm-signin-data" && chmod 777 bin/sync && bin/sync
+# wget  -O bin/save_gems "https://tinyurl.com/save-gems" && chmod 777 bin/save_gems && bin/save_gems
 require "open-uri"
 require 'fileutils'
 
