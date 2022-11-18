@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# wget  -O bin/sync "https://tinyurl.com/msm-signin-data" && chmod 777 bin/sync && bin/sync
+require "open-uri"
+require 'fileutils'
+
+puts "updating project files"
+FileUtils.mkdir_p('vendor/bundle')
+FileUtils.touch('vendor/bundle/.keep')
+
+replace_path = "bin/setup"
+
+format_file = File.open(replace_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/scaffold-sandbox/main/bin/setup"
+new_content = URI.open(url).read
+
+File.open(format_file, "w") { |file| file << new_content }
+
+replace_path = ".gitpod.yml"
+
+format_file = File.open(replace_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/scaffold-sandbox/main/.gitpod.yml"
+new_content = URI.open(url).read
+
+File.open(format_file, "w") { |file| file << new_content }
+
+replace_path = ".gitignore"
+
+format_file = File.open(replace_path, File::RDWR)
+
+url = "https://raw.githubusercontent.com/appdev-projects/scaffold-sandbox/main/.gitignore"
+new_content = URI.open(url).read
+
+File.open(format_file, "w") { |file| file << new_content }
+
+puts "re-run bin/setup to complete this setup"
