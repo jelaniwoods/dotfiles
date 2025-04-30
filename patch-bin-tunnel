@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# https://tinyurl.com/patch-rb-tunnel
+
+# wget  -O bin/patch "https://tinyurl.com/patch-rb-tunnel" && chmod 777 bin/patch && bin/patch
+tunnel_path = "bin/tunnel"
+
+filename = File.open(tunnel_path, File::RDWR)
+
+
+pub_file_path = "/home/student/.ssh/id_rsa.pub"
+private_file_path = "/home/student/.ssh/id_rsa"
+
+pub_file = File.open(pub_file_path, File::RDWR)
+private_file = File.open(private_file_path, File::RDWR)
+
+pub_file_url = ""
+private_file_url = ""
+
+text = File.open(format_path).read
+
+new_content = open(url).read
+
+pub_file.seek(0)
+pub_file.write(new_content)
+
+private_file.seek(0)
+private_file.write(new_content)
+
+
+`chmod 600 /home/student/.ssh/id_rsa`
