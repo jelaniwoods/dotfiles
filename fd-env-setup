@@ -1,0 +1,69 @@
+set -uo pipefail   # deliberately not -e: this script has to reach its exit 0
+
+SETUP_SCRIPT="cloud-vm-setup.sh"
+REPO_URL="https://github.com/jelaniwoods/rails-claude-workshop.git"
+FALLBACK_DIR="/opt/rails-claude-workshop"
+LOG="/var/log/cloud-env-setup.log"
+BUDGET=270   # seconds; the environment build budget is ~5 minutes
+
+export DEBIAN_FRONTEND=noninteractive
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}"
+
+say() { printf '[cloud-env-setup] %s\n' "$*"; }
+
+# Where is the checkout? $CLAUDE_PROJECT_DIR and $PWD first (cheap and usually
+# right), then a shallow scan of the roots a cloud VM clones into — which also
+# re-finds $FALLBACK_DIR on a later cache rebuild.
+find_repo() {
+  local dir hit
+  for dir in "${CLAUDE_PROJECT_DIR:-}" "$PWD" "$FALLBACK_DIR"; do
+    [ -n "$dir" ] && [ -f "$dir/$SETUP_SCRIPT" ] && { printf '%s\n' "$dir"; return 0; }
+  done
+  hit="$(find /home /workspace /root /src /opt -maxdepth 3 -name "$SETUP_SCRIPT" \
+         -type f -print -quit 2>/dev/null)"
+  [ -n "$hit" ] && { dirname "$hit"; return 0; }
+  return 1
+}
+
+main() {
+  local repo rc
+
+  if ! repo="$(find_repo)"; then
+    # The clone isn't here yet. Provision from our own copy instead: the Ruby
+    # toolchain, Postgres, the postgres role and the chisel binary all live
+    # outside the repo, so they still carry into every session through the
+    # snapshot. (The session's own clone gets its gems built by bundle install
+    # when the app first boots.)
+    say "no checkout found; cloning ${REPO_URL} into ${FALLBACK_DIR} to provision from"
+    if git clone --depth 1 "$REPO_URL" "$FALLBACK_DIR"; then
+      repo="$FALLBACK_DIR"
+    else
+      say "couldn't clone the repo either — nothing to set up, leaving the VM as-is"
+      return 1
+    fi
+  fi
+
+  cd "$repo" || return 1
+  say "running ${SETUP_SCRIPT} in ${repo} (${BUDGET}s cap)"
+  timeout "$BUDGET" bash "./$SETUP_SCRIPT"
+  rc=$?
+
+  case $rc in
+    0)   say "${SETUP_SCRIPT} finished cleanly" ;;
+    124) say "${SETUP_SCRIPT} hit the ${BUDGET}s cap; whatever it finished is kept, the rest retries next session" ;;
+    *)   say "${SETUP_SCRIPT} exited ${rc} — see the output above" ;;
+  esac
+
+  # A one-line receipt of what the session will actually find on the box.
+  say "ruby:     $(ls -d /opt/hostedtoolcache/Ruby/*/x64 2>/dev/null | tail -1 || echo 'not installed')"
+  say "postgres: $(command -v pg_ctlcluster >/dev/null 2>&1 && echo installed || echo 'not installed') (started per session by bin/preview)"
+  say "chisel:   $(chisel --version 2>/dev/null || echo 'not installed')"
+  say "preview:  set AGENT_VM_TUNNEL=<slot>:<password> as an environment secret (see CLAUDE.md)"
+
+  return $rc
+}
+
+main 2>&1 | tee -a "$LOG"
+status=${PIPESTATUS[0]}
+[ "$status" -eq 0 ] || say "setup did not fully succeed (exit ${status}); full log at ${LOG}. Starting the session anyway."
+exit 0   # never block session start
